@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "221594929466",
+    "project_id": "blogapp-85aa3",
+    "storage_bucket": "blogapp-85aa3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:221594929466:android:756b2efddc04860399e803",
+        "android_client_info": {
+          "package_name": "com.alepagani.blogapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZvKodHAPahpbwH74xkTt6gQskTm2qIKw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
