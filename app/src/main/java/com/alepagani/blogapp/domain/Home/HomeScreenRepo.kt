@@ -1,4 +1,4 @@
-package com.alepagani.blogapp.domain
+package com.alepagani.blogapp.domain.Home
 
 import com.alepagani.blogapp.core.Resource
 import com.alepagani.blogapp.data.model.Post

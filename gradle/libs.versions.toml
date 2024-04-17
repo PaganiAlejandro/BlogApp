@@ -14,6 +14,7 @@ firebaseFirestore = "24.11.1"
 firebaseCrashlytics = "18.6.4"
 gradle = "8.1.0"
 firebaseCrashlyticsGradle = "2.9.9"
+firebaseAuth = "22.3.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -29,6 +30,7 @@ firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore
 firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics", version.ref = "firebaseCrashlytics" }
 gradle = { group = "com.android.tools.build", name = "gradle", version.ref = "gradle" }
 firebase-crashlytics-gradle = { group = "com.google.firebase", name = "firebase-crashlytics-gradle", version.ref = "firebaseCrashlyticsGradle" }
+firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version.ref = "firebaseAuth" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

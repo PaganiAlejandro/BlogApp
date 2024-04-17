@@ -1,4 +1,4 @@
-package com.alepagani.blogapp.data.remote
+package com.alepagani.blogapp.data.remote.home
 
 import com.alepagani.blogapp.core.Resource
 import com.alepagani.blogapp.data.model.Post

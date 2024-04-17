@@ -7,14 +7,12 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.alepagani.blogapp.R
 import com.alepagani.blogapp.core.Resource
-import com.alepagani.blogapp.data.model.Post
-import com.alepagani.blogapp.data.remote.HomeScreenDataSource
+import com.alepagani.blogapp.data.remote.home.HomeScreenDataSource
 import com.alepagani.blogapp.databinding.FragmentHomeScreenBinding
-import com.alepagani.blogapp.domain.HomeScreeRepoImpl
-import com.alepagani.blogapp.presentation.HomeScreenViewModel
-import com.alepagani.blogapp.presentation.HomeScreenViewModelFactory
+import com.alepagani.blogapp.domain.Home.HomeScreeRepoImpl
+import com.alepagani.blogapp.presentation.home.HomeScreenViewModel
+import com.alepagani.blogapp.presentation.home.HomeScreenViewModelFactory
 import com.alepagani.blogapp.ui.home.adapter.HomeScreenAdapter
-import com.google.firebase.Timestamp
 
 class HomeScreenFragment : Fragment(R.layout.fragment_home_screen) {
 

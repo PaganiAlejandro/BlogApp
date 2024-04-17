@@ -1,10 +1,10 @@
-package com.alepagani.blogapp.presentation
+package com.alepagani.blogapp.presentation.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.liveData
 import com.alepagani.blogapp.core.Resource
-import com.alepagani.blogapp.domain.HomeScreenRepo
+import com.alepagani.blogapp.domain.Home.HomeScreenRepo
 import kotlinx.coroutines.Dispatchers
 
 class HomeScreenViewModel(private val repo: HomeScreenRepo): ViewModel() {
