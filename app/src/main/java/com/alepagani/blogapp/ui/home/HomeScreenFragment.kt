@@ -7,6 +7,8 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.alepagani.blogapp.R
 import com.alepagani.blogapp.core.Result
+import com.alepagani.blogapp.core.hide
+import com.alepagani.blogapp.core.show
 import com.alepagani.blogapp.data.remote.home.HomeScreenDataSource
 import com.alepagani.blogapp.databinding.FragmentHomeScreenBinding
 import com.alepagani.blogapp.domain.Home.HomeScreeRepoImpl
@@ -28,6 +30,12 @@ class HomeScreenFragment : Fragment(R.layout.fragment_home_screen) {
                 is Result.Loading -> binding.progressBar.visibility = View.VISIBLE
                 is Result.Success -> {
                     binding.progressBar.visibility = View.GONE
+                    if (result.data.isEmpty()) {
+                        binding.emptyContariner.show()
+                        return@observe
+                    } else {
+                        binding.emptyContariner.hide()
+                    }
                     binding.rvHome.adapter = HomeScreenAdapter(result.data)
                 }
                 is Result.Failure -> {
