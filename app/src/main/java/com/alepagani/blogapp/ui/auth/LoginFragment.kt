@@ -7,23 +7,24 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.alepagani.blogapp.R
-import com.alepagani.blogapp.core.Resource
+import com.alepagani.blogapp.core.Result
 import com.alepagani.blogapp.data.remote.login.LoginDataSource
 import com.alepagani.blogapp.databinding.FragmentLoginBinding
-import com.alepagani.blogapp.domain.auth.LoginRepoImpl
-import com.alepagani.blogapp.presentation.login.LoginScreenViewModel
-import com.alepagani.blogapp.presentation.login.LoginScreenViewModelFactory
+import com.alepagani.blogapp.domain.auth.AuthRepoImpl
+import com.alepagani.blogapp.presentation.auth.AuthViewModel
+import com.alepagani.blogapp.presentation.auth.AuthViewModelFactory
 import com.google.firebase.auth.FirebaseAuth
 
 class LoginFragment : Fragment(R.layout.fragment_login) {
 
     private lateinit var binding: FragmentLoginBinding
     private val firebaseAuth by lazy { FirebaseAuth.getInstance() }
-    private val viewModel by viewModels<LoginScreenViewModel> { LoginScreenViewModelFactory(LoginRepoImpl(LoginDataSource())) }
+    private val viewModel by viewModels<AuthViewModel> { AuthViewModelFactory(AuthRepoImpl(LoginDataSource())) }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentLoginBinding.bind(view)
         isUserLoggedIn()
+        goToSignUpPage()
     }
 
     private fun isUserLoggedIn() {
@@ -31,6 +32,12 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             findNavController().navigate(R.id.action_loginFragment_to_homeScreenFragment)
         } ?: run {
             doLogin()
+        }
+    }
+
+    private fun goToSignUpPage() {
+        binding.textSignup.setOnClickListener {
+            findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
     }
 
@@ -57,17 +64,17 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     private fun signIn(email: String, password: String) {
         viewModel.signIn(email, password).observe(viewLifecycleOwner, { result ->
             when (result) {
-                is Resource.Loading -> {
+                is Result.Loading -> {
                     binding.progressBar.visibility = View.VISIBLE
                     binding.btnSignin.isEnabled = false
                 }
 
-                is Resource.Success -> {
+                is Result.Success -> {
                     binding.progressBar.visibility = View.GONE
                     findNavController().navigate(R.id.action_loginFragment_to_homeScreenFragment)
                 }
 
-                is Resource.Failure -> {
+                is Result.Failure -> {
                     binding.progressBar.visibility = View.GONE
                     binding.btnSignin.isEnabled = true
                     Toast.makeText(requireContext(), "Error: ${result.exception.toString()}", Toast.LENGTH_SHORT).show()
