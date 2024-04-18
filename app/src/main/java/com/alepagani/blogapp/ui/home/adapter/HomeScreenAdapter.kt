@@ -8,6 +8,7 @@ import com.alepagani.blogapp.core.BaseViewHolder
 import com.alepagani.blogapp.data.model.Post
 import com.alepagani.blogapp.databinding.PostItemViewBinding
 import com.bumptech.glide.Glide
+import com.example.blogapp.core.TimeUtils
 
 class HomeScreenAdapter(private val postList: List<Post>): RecyclerView.Adapter<BaseViewHolder<*>>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<*> {
@@ -31,7 +32,11 @@ class HomeScreenAdapter(private val postList: List<Post>): RecyclerView.Adapter<
             Glide.with(context).load(item.post_image).centerCrop().into(binding.postBackground)
             Glide.with(context).load(item.profile_picture).centerCrop().into(binding.profilePicture)
             binding.profileName.text = item.profile_name
-            binding.postTimestamp.text = "Hace 2 horas"
+
+            val createdAt = (item.created_at?.time?.div(1000))?.let {
+                TimeUtils.getTimeAgo(it.toInt())
+            }
+            binding.postTimestamp.text = createdAt
         }
     }
 }

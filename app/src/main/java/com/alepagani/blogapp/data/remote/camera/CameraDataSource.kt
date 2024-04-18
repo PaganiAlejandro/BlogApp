@@ -9,6 +9,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.tasks.await
 import java.io.ByteArrayOutputStream
+import java.util.Date
 import java.util.UUID
 
 class CameraDataSource {
@@ -34,13 +35,5 @@ class CameraDataSource {
                 it
             )
         }
-
-        // val profileUpdates = UserProfileChangeRequest.Builder()
-        //     .setDisplayName(userName)
-        //     .setPhotoUri(Uri.parse(downloadUrl))
-        //     .build()
-        //
-        // user?.updateProfile(profileUpdates)?.await()
-
     }
 }
