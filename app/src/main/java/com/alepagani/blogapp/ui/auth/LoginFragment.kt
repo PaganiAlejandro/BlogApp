@@ -8,6 +8,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.alepagani.blogapp.R
 import com.alepagani.blogapp.core.Result
+import com.alepagani.blogapp.core.hideKeyboard
 import com.alepagani.blogapp.data.remote.login.LoginDataSource
 import com.alepagani.blogapp.databinding.FragmentLoginBinding
 import com.alepagani.blogapp.domain.auth.AuthRepoImpl
@@ -46,6 +47,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
     private fun doLogin() {
         binding.btnSignin.setOnClickListener {
+            it.hideKeyboard()
             val email = binding.edittextEmail.text.toString().trim()
             val password = binding.edittextPassword.text.toString().trim()
             validateCredential(email, password)

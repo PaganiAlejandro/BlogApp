@@ -79,6 +79,10 @@ dependencies {
     // Lifecycle
     implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.4.0-alpha01")
 
+    //Used for StateFlow
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.8")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1")
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

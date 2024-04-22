@@ -3,6 +3,7 @@ package com.alepagani.blogapp.data.remote.camera
 import android.graphics.Bitmap
 import android.net.Uri
 import com.alepagani.blogapp.data.model.Post
+import com.alepagani.blogapp.data.model.Poster
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.firestore.FirebaseFirestore
@@ -24,12 +25,16 @@ class CameraDataSource {
         val downloadUrl = imageRef.putBytes(baos.toByteArray()).await().storage.downloadUrl.await().toString()
         user?.displayName?.let {
             Post(
-                profile_name = it.toString(),
-                profile_picture = user?.photoUrl.toString(),
+                poster = Poster(
+                    username = it,
+                    uid = user.uid,
+                    profile_picture = user?.photoUrl.toString()
+
+                ),
                 post_image = downloadUrl,
                 post_description = description,
-                uid = user.uid.toString()
-                )
+                likes = 0
+            )
         }?.let {
             FirebaseFirestore.getInstance().collection("posts").add(
                 it
