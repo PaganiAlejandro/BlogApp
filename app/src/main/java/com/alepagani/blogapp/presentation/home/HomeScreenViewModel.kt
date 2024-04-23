@@ -6,15 +6,19 @@ import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.alepagani.blogapp.core.Result
 import com.alepagani.blogapp.data.model.Post
+import com.alepagani.blogapp.domain.Home.HomeScreeRepoImpl
 import com.alepagani.blogapp.domain.Home.HomeScreenRepo
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.stateIn
 import java.lang.Exception
+import javax.inject.Inject
 
-class HomeScreenViewModel(private val repo: HomeScreenRepo): ViewModel() {
+@HiltViewModel
+class HomeScreenViewModel @Inject constructor(private val repo: HomeScreenRepo): ViewModel() {
 
     fun fetchLatestPosts() = liveData(viewModelScope.coroutineContext + Dispatchers.Main) {
         emit(Result.Loading())
@@ -27,6 +31,7 @@ class HomeScreenViewModel(private val repo: HomeScreenRepo): ViewModel() {
         }
     }
 
+    // esto es el metodo de arriba, pero con stateflow
     val latestPost: StateFlow<Result<List<Post>>> = flow {
         runCatching {
             repo.getLatestPost()
@@ -53,8 +58,8 @@ class HomeScreenViewModel(private val repo: HomeScreenRepo): ViewModel() {
     }
 }
 
-class HomeScreenViewModelFactory(private val repo: HomeScreenRepo): ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return modelClass.getConstructor(HomeScreenRepo::class.java).newInstance(repo)
-    }
-}
+// class HomeScreenViewModelFactory(private val repo: HomeScreenRepo): ViewModelProvider.Factory {
+//     override fun <T : ViewModel> create(modelClass: Class<T>): T {
+//         return modelClass.getConstructor(HomeScreenRepo::class.java).newInstance(repo)
+//     }
+// }

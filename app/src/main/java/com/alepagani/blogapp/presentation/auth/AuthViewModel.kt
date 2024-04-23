@@ -7,9 +7,13 @@ import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.alepagani.blogapp.core.Result
 import com.alepagani.blogapp.domain.auth.AuthRepo
+import com.alepagani.blogapp.domain.auth.AuthRepoImpl
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import javax.inject.Inject
 
-class AuthViewModel(private val repo: AuthRepo): ViewModel() {
+@HiltViewModel
+class AuthViewModel @Inject constructor(private val repo: AuthRepoImpl): ViewModel() {
 
     fun signIn(email: String, password: String) = liveData(Dispatchers.IO) {
         emit(Result.Loading())
@@ -39,8 +43,8 @@ class AuthViewModel(private val repo: AuthRepo): ViewModel() {
     }
 }
 
-class AuthViewModelFactory(private val repo: AuthRepo): ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return AuthViewModel(repo) as T
-    }
-}
+// class AuthViewModelFactory(private val repo: AuthRepo): ViewModelProvider.Factory {
+//     override fun <T : ViewModel> create(modelClass: Class<T>): T {
+//         return AuthViewModel(repo) as T
+//     }
+// }

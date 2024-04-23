@@ -2,24 +2,21 @@ package com.alepagani.blogapp.ui.auth
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.alepagani.blogapp.R
 import com.alepagani.blogapp.core.Result
-import com.alepagani.blogapp.data.remote.login.LoginDataSource
 import com.alepagani.blogapp.databinding.FragmentRegisterBinding
-import com.alepagani.blogapp.domain.auth.AuthRepoImpl
 import com.alepagani.blogapp.presentation.auth.AuthViewModel
-import com.alepagani.blogapp.presentation.auth.AuthViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class RegisterFragment : Fragment(R.layout.fragment_register) {
 
     private lateinit var binding: FragmentRegisterBinding
-    private val viewModel by viewModels<AuthViewModel> { AuthViewModelFactory(AuthRepoImpl(LoginDataSource())) }
+    private val viewModel by viewModels<AuthViewModel>()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentRegisterBinding.bind(view)

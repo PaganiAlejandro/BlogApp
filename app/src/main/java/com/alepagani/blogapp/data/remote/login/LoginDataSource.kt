@@ -10,8 +10,9 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.tasks.await
 import java.io.ByteArrayOutputStream
+import javax.inject.Inject
 
-class LoginDataSource {
+class LoginDataSource @Inject constructor() {
     suspend fun signIn(email: String, password: String): FirebaseUser? {
         val authResult = FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password).await()
         return authResult.user

@@ -12,8 +12,9 @@ import kotlinx.coroutines.tasks.await
 import java.io.ByteArrayOutputStream
 import java.util.Date
 import java.util.UUID
+import javax.inject.Inject
 
-class CameraDataSource {
+class CameraDataSource @Inject constructor() {
     suspend fun uploadPhoto(imageBitmap: Bitmap, description: String) {
         val user = FirebaseAuth.getInstance().currentUser
         val ramdomName = UUID.randomUUID().toString()

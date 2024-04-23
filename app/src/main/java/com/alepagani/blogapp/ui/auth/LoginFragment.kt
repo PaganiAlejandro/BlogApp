@@ -9,18 +9,18 @@ import androidx.navigation.fragment.findNavController
 import com.alepagani.blogapp.R
 import com.alepagani.blogapp.core.Result
 import com.alepagani.blogapp.core.hideKeyboard
-import com.alepagani.blogapp.data.remote.login.LoginDataSource
 import com.alepagani.blogapp.databinding.FragmentLoginBinding
-import com.alepagani.blogapp.domain.auth.AuthRepoImpl
 import com.alepagani.blogapp.presentation.auth.AuthViewModel
-import com.alepagani.blogapp.presentation.auth.AuthViewModelFactory
 import com.google.firebase.auth.FirebaseAuth
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LoginFragment : Fragment(R.layout.fragment_login) {
 
     private lateinit var binding: FragmentLoginBinding
     private val firebaseAuth by lazy { FirebaseAuth.getInstance() }
-    private val viewModel by viewModels<AuthViewModel> { AuthViewModelFactory(AuthRepoImpl(LoginDataSource())) }
+    private val viewModel by viewModels<AuthViewModel>()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentLoginBinding.bind(view)
@@ -87,7 +87,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                 is Result.Failure -> {
                     binding.progressBar.visibility = View.GONE
                     binding.btnSignin.isEnabled = true
-                    Toast.makeText(requireContext(), "Error: ${result.exception.toString()}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Error: ${result.exception}", Toast.LENGTH_SHORT).show()
                 }
             }
         })

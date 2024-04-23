@@ -13,20 +13,18 @@ import com.alepagani.blogapp.core.Result
 import com.alepagani.blogapp.core.hide
 import com.alepagani.blogapp.core.show
 import com.alepagani.blogapp.data.model.Post
-import com.alepagani.blogapp.data.remote.home.HomeScreenDataSource
 import com.alepagani.blogapp.databinding.FragmentHomeScreenBinding
-import com.alepagani.blogapp.domain.Home.HomeScreeRepoImpl
 import com.alepagani.blogapp.presentation.home.HomeScreenViewModel
-import com.alepagani.blogapp.presentation.home.HomeScreenViewModelFactory
 import com.alepagani.blogapp.ui.home.adapter.HomeScreenAdapter
 import com.alepagani.blogapp.ui.home.adapter.OnPostClickListener
-import kotlinx.coroutines.flow.collect
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class HomeScreenFragment : Fragment(R.layout.fragment_home_screen), OnPostClickListener {
 
     private lateinit var binding: FragmentHomeScreenBinding
-    private val viewModel by viewModels<HomeScreenViewModel> { HomeScreenViewModelFactory(HomeScreeRepoImpl(HomeScreenDataSource())) }
+    private val viewModel: HomeScreenViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

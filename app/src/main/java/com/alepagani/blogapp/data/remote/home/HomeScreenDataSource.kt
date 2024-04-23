@@ -1,7 +1,5 @@
 package com.alepagani.blogapp.data.remote.home
 
-import android.net.wifi.aware.DiscoverySession
-import android.util.Log
 import com.alepagani.blogapp.core.Result
 import com.alepagani.blogapp.data.model.Post
 import com.google.firebase.auth.FirebaseAuth
@@ -10,12 +8,12 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.SetOptions
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import java.lang.Exception
+import javax.inject.Inject
 
-class HomeScreenDataSource() {
+class HomeScreenDataSource @Inject constructor() {
 
     suspend fun getLatestPost(): Result<List<Post>>  {
         val postList = mutableListOf<Post>()

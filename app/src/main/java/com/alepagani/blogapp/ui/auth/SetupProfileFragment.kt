@@ -8,26 +8,23 @@ import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import com.alepagani.blogapp.core.Result
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.alepagani.blogapp.R
-import com.alepagani.blogapp.data.remote.login.LoginDataSource
 import com.alepagani.blogapp.databinding.FragmentSetupProfileBinding
-import com.alepagani.blogapp.domain.auth.AuthRepoImpl
 import com.alepagani.blogapp.presentation.auth.AuthViewModel
-import com.alepagani.blogapp.presentation.auth.AuthViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SetupProfileFragment : Fragment(R.layout.fragment_setup_profile) {
 
     val REQUEST_IMAGE_CAPTURE = 1
 
     private lateinit var binding: FragmentSetupProfileBinding
-    private val viewModel by viewModels<AuthViewModel> { AuthViewModelFactory(AuthRepoImpl(LoginDataSource())) }
+    private val viewModel by viewModels<AuthViewModel>()
     private var bitmap: Bitmap? = null
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
